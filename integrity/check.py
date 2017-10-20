@@ -158,6 +158,15 @@ def labels(data):
     err_count += _assert("number of non 0, 1 labels",
                          idx.size - idx.sum(), '==', 0)
 
+    # test and live labels should be NaN
+    regions = ['test', 'live']
+    for region in regions:
+        idx = data.region == region
+        y = data.y[idx]
+        if not np.isnan(y).all():
+            err_count += 1
+            logging.warn("Some %s labels are not NaN" % region)
+
     # mean of labels and number of labels
     y_mean = []
     for era, index in data.era_iter():
