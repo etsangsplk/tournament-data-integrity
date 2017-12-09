@@ -120,7 +120,7 @@ def features(data):
     err_count += interval('mean abs corr of features',
                           corr.mean(), [0.18, 0.22])
     err_count += interval('max  abs corr of features',
-                          corr.max(), [0.67, 0.7])
+                          corr.max(), [0.7, 0.73])
 
     # distribution of each feature in each era
     for era, feature_num, x in data.era_feature_iter():
@@ -129,10 +129,10 @@ def features(data):
         err_count += array_interval(msg, x, [0, 1])
 
         msg = 'mean  of feature %2d in %s' % (feature_num, era.ljust(6))
-        err_count += interval(msg, x.mean(), [0.45, 0.553])
+        err_count += interval(msg, x.mean(), [0.44, 0.57])
 
         msg = 'std   of feature %2d in %s' % (feature_num, era.ljust(6))
-        err_count += interval(msg, x.std(), [0.09, 0.15])
+        err_count += interval(msg, x.std(), [0.085, 0.158])
 
         msg = 'skewn of feature %2d in %s' % (feature_num, era.ljust(6))
         skew = ((x - x.mean())**3).mean() / x.std()**3
@@ -140,7 +140,7 @@ def features(data):
 
         msg = 'kurto of feature %2d in %s' % (feature_num, era.ljust(6))
         kurt = ((x - x.mean())**4).mean() / x.std()**4
-        err_count += interval(msg, kurt, [2.45, 3.7])
+        err_count += interval(msg, kurt, [2.44, 3.7])
 
     return err_count
 
