@@ -69,7 +69,7 @@ def eras(data):
     err_count = 0
 
     # number of eras
-    target = {'train': 85,
+    target = {'train': 120,
               'validation': 12,
               'test': 1,
               'live': 1}
@@ -120,7 +120,7 @@ def features(data):
     err_count += interval('mean abs corr of features',
                           corr.mean(), [0.18, 0.22])
     err_count += interval('max  abs corr of features',
-                          corr.max(), [0.72, 0.76])
+                          corr.max(), [0.67, 0.7])
 
     # distribution of each feature in each era
     for era, feature_num, x in data.era_feature_iter():
@@ -129,7 +129,7 @@ def features(data):
         err_count += array_interval(msg, x, [0, 1])
 
         msg = 'mean  of feature %2d in %s' % (feature_num, era.ljust(6))
-        err_count += interval(msg, x.mean(), [0.45, 0.551])
+        err_count += interval(msg, x.mean(), [0.45, 0.553])
 
         msg = 'std   of feature %2d in %s' % (feature_num, era.ljust(6))
         err_count += interval(msg, x.std(), [0.09, 0.15])
@@ -140,7 +140,7 @@ def features(data):
 
         msg = 'kurto of feature %2d in %s' % (feature_num, era.ljust(6))
         kurt = ((x - x.mean())**4).mean() / x.std()**4
-        err_count += interval(msg, kurt, [2.45, 3.58])
+        err_count += interval(msg, kurt, [2.45, 3.7])
 
     return err_count
 
@@ -180,11 +180,11 @@ def labels(data):
             err_count += interval(msg, ym, [0.499, 0.501])
             y_mean.append(ym)
 
-        msg = 'num  of labels in %s' % era.ljust(6)
+        msg = 'num of labels in %s' % era.ljust(6)
         if era == 'eraX':
-            limit = [270000, 280000]
+            limit = [197000, 198000]
         else:
-            limit = [5920, 6800]
+            limit = [1500, 4200]
         err_count += interval(msg, y.size, limit)
 
     # label bias
