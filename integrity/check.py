@@ -182,7 +182,7 @@ def labels(data):
 
         msg = 'num of labels in %s' % era.ljust(6)
         if era == 'eraX':
-            limit = [197000, 198000]
+            limit = [196000, 198000]
         else:
             limit = [1500, 4200]
         err_count += interval(msg, y.size, limit)
